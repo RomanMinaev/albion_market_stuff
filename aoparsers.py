@@ -26,7 +26,7 @@ class AOParsers:
 		else:
 			fixed_itemId = itemId
 		html_data = requests.get(
-			f'https://www.albion-online-data.com/api/v2/stats/Prices/{fixed_itemId}.JSON?qualities={quality}')
+			f'https://www.albion-online-data.com/api/v2/stats/Prices/{fixed_itemId}.JSON?qualities={quality}', timeout=5)
 		json_data = html_data.json()
 		# print('AOParsers: json_data was parsed')
 		with open('respond.json', 'w') as file:
