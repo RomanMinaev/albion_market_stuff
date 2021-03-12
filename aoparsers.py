@@ -140,23 +140,19 @@ class AOParsers:
 		return
 
 	@staticmethod
-	def black_market_flip(itemId, quality, city):
+	def flip(itemId, quality, city):
 		# print(f'AOParsers: Pulling Black Market and Caerleon prices')
 		AOParsers.JSON_price_pull(itemId, quality)
 		prices = AOParsers.JSON_price_get()
 		# print(prices)
-		bm_prices = prices['black_market'][0]
-		bm_price = bm_prices['buy_price_max']
-		bm_date = bm_prices['buy_price_max_date']
-		caerleon_prices = prices[city][0]
-		caerleon_price = caerleon_prices['sell_price_min']
-		caerleon_date = caerleon_prices['sell_price_min_date']
-		potential_profit_taxed = float(bm_price) * float(0.97) - float(caerleon_price)
-		rounded_profit = round(potential_profit_taxed)
+		city_prices = prices[city][0]
+		city_price = city_prices['sell_price_min']
+		city_date = city_prices['sell_price_min_date']
+		bm = city_prices['buy_price_max']
 		output = {
-			'bm_price': bm_price, 'bm_date': bm_date,
-			'caerleon_price': caerleon_price, 'caerleon_date': caerleon_date,
-			'profit': rounded_profit, 'itemId': itemId, 'quality': quality}
+			'city_price': city_price, 'city_date': city_date,
+			'bm': bm
+		}
 		return output
 
 	@staticmethod
@@ -178,7 +174,7 @@ class AOParsers:
 					unique_name = unique_name + f'@{enchant}'
 				for quality_count in qualities:
 					try:
-						price = AOParsers.black_market_flip(unique_name, quality_count, city)
+						price = AOParsers.flip(unique_name, quality_count, city)
 						print(price)
 					except JSONDecodeError:
 						continue

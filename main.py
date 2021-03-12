@@ -50,21 +50,52 @@ async def on_message(message):
         itemId = AOParsers.item_to_itemid(item)
         if '@' in saved_item:
             itemId = itemId + '@' + point
-        flips = AOParsers.black_market_flip(itemId, quality, 'caerleon')
-        bm_price = flips['bm_price']
-        bm_date = flips['bm_date']
-        caerleon_price = flips['caerleon_price']
-        caerleon_date = flips['caerleon_date']
-        profit = flips['profit']
+        bm = AOParsers.flip(itemId, quality, 'black_market')
+        bm_price = bm['bm']
+        bm_date = bm['city_date']
+        caerleon = AOParsers.flip(itemId, quality, 'caerleon')
+        caerleon_price = caerleon['city_price']
+        caerleon_date = caerleon['city_date']
+        fort_sterling = AOParsers.flip(itemId, quality, 'fort_sterling')
+        fort_sterling_price = fort_sterling['city_price']
+        fort_sterling_date = fort_sterling['city_date']
+        lymhurst = AOParsers.flip(itemId, quality, 'lymhurst')
+        lymhurst_price = lymhurst['city_price']
+        lymhurst_date = lymhurst['city_date']
+        bridgewatch = AOParsers.flip(itemId, quality, 'bridgewatch')
+        bridgewatch_price = bridgewatch['city_price']
+        bridgewatch_date = bridgewatch['city_date']
+        martlock = AOParsers.flip(itemId, quality, 'martlock')
+        martlock_price = martlock['city_price']
+        martlock_date = martlock['city_date']
+        thetford = AOParsers.flip(itemId, quality, 'thetford')
+        thetford_price = thetford['city_price']
+        thetford_date = thetford['city_date']
         print(f'AOParser responded with {itemId}')
         embed_msg = discord.Embed(
             title=f'{item}',
-            description=f'**Item ID:** {itemId}\n'
-                        f'**Black Market:** {bm_price} '
+            description=f'🆔**Item ID:** {itemId}\n'
+                        '\n'
+                        f'🟥**Black Market:** {bm_price} '
                         f'**Last seen at:** {bm_date}\n'
-                        f'**Caerleon:** {caerleon_price} '
+                        '\n'
+                        f'🟥**Caerleon:** {caerleon_price} '
                         f'**Last seen at:** {caerleon_date}\n'
-                        f'**Flip profit:** {profit}'
+                        '\n'
+                        f'⬜**Fort Sterling:** {fort_sterling_price} '
+                        f'**Last seen at:** {fort_sterling_date}\n'
+                        '\n'
+                        f'🟩**Lymhurst:** {lymhurst_price} '
+                        f'**Last seen at:** {lymhurst_date}\n'
+                        '\n'
+                        f'🟧**Bridgewatch:** {bridgewatch_price} '
+                        f'**Last seen at:** {bridgewatch_date}\n'
+                        '\n'
+                        f'🟦**Martlock:** {martlock_price} '
+                        f'**Last seen at:** {martlock_date}\n'
+                        '\n'
+                        f'🟪**Thetford:** {thetford_price} '
+                        f'**Last seen at:** {thetford_date}\n'
         )
         print(f'http://render.albiononline.com/v1/item/{itemId}.png?count=1&quality={quality}')
         embed_msg.set_image(url=f'http://render.albiononline.com/v1/item/{itemId}.png?count=1&quality={quality}')
@@ -72,75 +103,5 @@ async def on_message(message):
                              icon_url=username.avatar_url)
         embed_msg.set_footer(text='Contact OopsieDoopsie#0412 if you need help with a bot.')
         await channel.send(embed=embed_msg)
-
-    if message.content.startswith('..get_rich'):
-        while True:
-            flips = AOParsers.get_rich('caerleon', 10000)
-            try:
-                if flips['itemId'] is None:
-                    continue
-                else:
-                    itemId = flips['itemId']
-                    quality = flips['quality']
-                    bm_price = flips['bm_price']
-                    bm_date = flips['bm_date']
-                    caerleon_price = flips['caerleon_price']
-                    caerleon_date = flips['caerleon_date']
-                    profit = flips['profit']
-                    print(f'AOParser responded with {itemId}')
-                    embed_msg = discord.Embed(
-                        title=f'Test',
-                        description=f'**Item ID:** {itemId}\n'
-                                    f'**Black Market:** {bm_price} '
-                                    f'**Last seen at:** {bm_date}\n'
-                                    f'**Caerleon:** {caerleon_price} '
-                                    f'**Last seen at:** {caerleon_date}\n'
-                                    f'**Flip profit:** {profit}'
-                    )
-                    print(f'http://render.albiononline.com/v1/item/{itemId}.png?count=1&quality={quality}')
-                    embed_msg.set_image(
-                        url=f'http://render.albiononline.com/v1/item/{itemId}.png?count=1&quality={quality}')
-                    embed_msg.set_author(name=username.display_name,
-                                         icon_url=username.avatar_url)
-                    embed_msg.set_footer(text='Contact OopsieDoopsie#0412 if you need help with a bot.')
-                    await channel.send(embed=embed_msg)
-            except TypeError:
-                continue
-
-    if message.content.startswith('..get_fs_rich'):
-        while True:
-            flips = AOParsers.get_rich('fort_sterling', 50000)
-            try:
-                if flips['itemId'] is None:
-                    continue
-                else:
-                    itemId = flips['itemId']
-                    quality = flips['quality']
-                    bm_price = flips['bm_price']
-                    bm_date = flips['bm_date']
-                    caerleon_price = flips['caerleon_price']
-                    caerleon_date = flips['caerleon_date']
-                    profit = flips['profit']
-                    print(f'AOParser responded with {itemId}')
-                    embed_msg = discord.Embed(
-                        title=f'Test',
-                        description=f'**Item ID:** {itemId}\n'
-                                    f'**Black Market:** {bm_price} '
-                                    f'**Last seen at:** {bm_date}\n'
-                                    f'**Fort Sterling:** {caerleon_price} '
-                                    f'**Last seen at:** {caerleon_date}\n'
-                                    f'**Flip profit:** {profit}'
-                    )
-                    print(f'http://render.albiononline.com/v1/item/{itemId}.png?count=1&quality={quality}')
-                    embed_msg.set_image(
-                        url=f'http://render.albiononline.com/v1/item/{itemId}.png?count=1&quality={quality}')
-                    embed_msg.set_author(name=username.display_name,
-                                         icon_url=username.avatar_url)
-                    embed_msg.set_footer(text='Contact OopsieDoopsie#0412 if you need help with a bot.')
-                    await channel.send(embed=embed_msg)
-            except TypeError:
-                continue
-
-
 
 client.run(bot_token)
