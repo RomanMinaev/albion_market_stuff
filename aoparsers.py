@@ -3,6 +3,7 @@ import json
 import re
 from json import JSONDecodeError
 from random import randint
+from requests import ReadTimeout
 
 
 # https://render.albiononline.com/v1/item/ for item pics
@@ -25,8 +26,13 @@ class AOParsers:
 			# print('AOParsers: Fixed @ symbol')
 		else:
 			fixed_itemId = itemId
-		html_data = requests.get(
-			f'https://www.albion-online-data.com/api/v2/stats/Prices/{fixed_itemId}.JSON?qualities={quality}', timeout=5)
+		try:
+			html_data = requests.get(
+				f'https://www.albion-online-data.com/api/v2/stats/Prices/{fixed_itemId}.JSON?qualities={quality}',
+				timeout=5)
+		except ReadTimeout:
+			return
+
 		json_data = html_data.json()
 		# print('AOParsers: json_data was parsed')
 		with open('respond.json', 'w') as file:
