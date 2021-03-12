@@ -50,7 +50,7 @@ async def on_message(message):
         itemId = AOParsers.item_to_itemid(item)
         if '@' in saved_item:
             itemId = itemId + '@' + point
-        flips = AOParsers.black_market_flip(itemId, quality)
+        flips = AOParsers.black_market_flip(itemId, quality, 'caerleon')
         bm_price = flips['bm_price']
         bm_date = flips['bm_date']
         caerleon_price = flips['caerleon_price']
@@ -75,7 +75,7 @@ async def on_message(message):
 
     if message.content.startswith('..get_rich'):
         while True:
-            flips = AOParsers.get_rich()
+            flips = AOParsers.get_rich('caerleon', 10000)
             try:
                 if flips['itemId'] is None:
                     continue
@@ -106,6 +106,41 @@ async def on_message(message):
                     await channel.send(embed=embed_msg)
             except TypeError:
                 continue
+
+    if message.content.startswith('..get_fs_rich'):
+        while True:
+            flips = AOParsers.get_rich('fort_sterling', 50000)
+            try:
+                if flips['itemId'] is None:
+                    continue
+                else:
+                    itemId = flips['itemId']
+                    quality = flips['quality']
+                    bm_price = flips['bm_price']
+                    bm_date = flips['bm_date']
+                    caerleon_price = flips['caerleon_price']
+                    caerleon_date = flips['caerleon_date']
+                    profit = flips['profit']
+                    print(f'AOParser responded with {itemId}')
+                    embed_msg = discord.Embed(
+                        title=f'Test',
+                        description=f'**Item ID:** {itemId}\n'
+                                    f'**Black Market:** {bm_price} '
+                                    f'**Last seen at:** {bm_date}\n'
+                                    f'**Fort Sterling:** {caerleon_price} '
+                                    f'**Last seen at:** {caerleon_date}\n'
+                                    f'**Flip profit:** {profit}'
+                    )
+                    print(f'http://render.albiononline.com/v1/item/{itemId}.png?count=1&quality={quality}')
+                    embed_msg.set_image(
+                        url=f'http://render.albiononline.com/v1/item/{itemId}.png?count=1&quality={quality}')
+                    embed_msg.set_author(name=username.display_name,
+                                         icon_url=username.avatar_url)
+                    embed_msg.set_footer(text='Contact OopsieDoopsie#0412 if you need help with a bot.')
+                    await channel.send(embed=embed_msg)
+            except TypeError:
+                continue
+
 
 
 client.run(bot_token)

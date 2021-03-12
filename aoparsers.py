@@ -140,7 +140,7 @@ class AOParsers:
 		return
 
 	@staticmethod
-	def black_market_flip(itemId, quality):
+	def black_market_flip(itemId, quality, city):
 		# print(f'AOParsers: Pulling Black Market and Caerleon prices')
 		AOParsers.JSON_price_pull(itemId, quality)
 		prices = AOParsers.JSON_price_get()
@@ -148,7 +148,7 @@ class AOParsers:
 		bm_prices = prices['black_market'][0]
 		bm_price = bm_prices['buy_price_max']
 		bm_date = bm_prices['buy_price_max_date']
-		caerleon_prices = prices['caerleon'][0]
+		caerleon_prices = prices[city][0]
 		caerleon_price = caerleon_prices['sell_price_min']
 		caerleon_date = caerleon_prices['sell_price_min_date']
 		potential_profit_taxed = float(bm_price) * float(0.97) - float(caerleon_price)
@@ -160,7 +160,7 @@ class AOParsers:
 		return output
 
 	@staticmethod
-	def get_rich():
+	def get_rich(city, profit_val):
 		enchants = [0, 1, 2, 3]
 		qualities = [1, 2, 3, 4, 5]
 		quality_names = {1: 'Normal', 2: 'Good', 3: 'Outstanding', 4: 'Excellent', 5: 'Masterpiece'}
@@ -178,13 +178,13 @@ class AOParsers:
 					unique_name = unique_name + f'@{enchant}'
 				for quality_count in qualities:
 					try:
-						price = AOParsers.black_market_flip(unique_name, quality_count)
+						price = AOParsers.black_market_flip(unique_name, quality_count, city)
 						print(price)
 					except JSONDecodeError:
 						continue
 					if price['bm_date'] == '0001-01-01T00:00:00':
 						return
-					if price['profit'] > 10000:
+					if price['profit'] > profit_val:
 						bm_price = price['bm_price']
 						bm_date = price['bm_date']
 						caerleon_price = price['caerleon_price']
