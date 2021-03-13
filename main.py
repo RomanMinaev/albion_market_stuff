@@ -1,6 +1,7 @@
 import discord
 from aoparsers import AOParsers
 import re
+import json
 
 bot_token_file = open('DISCORD TOKEN_test.txt', 'r')
 GUILD = 'SuSliK'
@@ -81,17 +82,22 @@ async def on_message(message):
         thetford_price = thetford['city_price']
         thetford_date = thetford['city_date']
         print(f'AOParser responded with {itemId}')
-        mats_list = AOParsers.mats_reqs(itemId)
-        mats_list_embed = []
-        for mat in mats_list:
-            mats_list_embed.append(f"**{AOParsers.itemid_to_item(next(iter(mat)))}:** {mat[next(iter(mat))]}")
-        mats_city = 'fort_sterling'
-        from_mats_cost = AOParsers.mats_cost(AOParsers.mats_reqs(itemId),  mats_city)
-        print(f'IN MAIN: {from_mats_cost}')
-        try:
-            tryer = mats_list_embed[1]
-        except IndexError:
-            mats_list_embed.append('')
+        with open('crafting_reqs.json','r') as file:
+            crafting_Ids = json.load(file)[1]
+        if itemId in crafting_Ids:
+            mats_list = AOParsers.mats_reqs(itemId)
+            mats_list_embed = []
+            for mat in mats_list:
+                mats_list_embed.append(f"**{AOParsers.itemid_to_item(next(iter(mat)))}:** {mat[next(iter(mat))]}")
+            mats_city = 'fort_sterling'
+            from_mats_cost = AOParsers.mats_cost(AOParsers.mats_reqs(itemId), mats_city)
+            print(f'IN MAIN: {from_mats_cost}')
+            try:
+                tryer = mats_list_embed[1]
+            except IndexError:
+                mats_list_embed.append('')
+
+
         embed_msg = discord.Embed(
             title=f'{item}',
             description=f'🆔**Item ID:** {itemId}\n'
