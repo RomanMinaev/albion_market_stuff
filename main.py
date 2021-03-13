@@ -35,6 +35,15 @@ async def on_message(message):
     if message.content.startswith('..item'):
         print('..item was called')
         item = message.content[7:]
+        if item[0] == 'T':
+            tiers = {
+                "2": "Novice's ", "3": "Journeyman's ",
+                "4": "Adept's ", "5": "Expert's ", "6": "Master's ",
+                "7": "Grandmaster's ", "8": "Elder's "}
+            tier = item[1]
+            item = item[3:]
+            item = tiers[tier] + item
+            print(item)
         saved_item = item
         quality = str(1)  # placeholer value
         if '@' in saved_item:
@@ -52,7 +61,7 @@ async def on_message(message):
             itemId = itemId + '@' + point
         bm = AOParsers.flip(itemId, quality, 'black_market')
         bm_price = bm['bm']
-        bm_date = bm['city_date']
+        bm_date = bm['bm_date']
         caerleon = AOParsers.flip(itemId, quality, 'caerleon')
         caerleon_price = caerleon['city_price']
         caerleon_date = caerleon['city_date']
@@ -72,6 +81,17 @@ async def on_message(message):
         thetford_price = thetford['city_price']
         thetford_date = thetford['city_date']
         print(f'AOParser responded with {itemId}')
+        mats_list = AOParsers.mats_reqs(itemId)
+        mats_list_embed = []
+        for mat in mats_list:
+            mats_list_embed.append(f"**{AOParsers.itemid_to_item(next(iter(mat)))}:** {mat[next(iter(mat))]}")
+        mats_city = 'fort_sterling'
+        from_mats_cost = AOParsers.mats_cost(AOParsers.mats_reqs(itemId),  mats_city)
+        print(f'IN MAIN: {from_mats_cost}')
+        try:
+            tryer = mats_list_embed[1]
+        except IndexError:
+            mats_list_embed.append('')
         embed_msg = discord.Embed(
             title=f'{item}',
             description=f'🆔**Item ID:** {itemId}\n'
@@ -96,6 +116,18 @@ async def on_message(message):
                         '\n'
                         f'🟪**Thetford:** {thetford_price} '
                         f'**Last seen at:** {thetford_date}\n'
+                        '\n'
+                        '\n'
+                        #f'⚒️{mats_list_embed[0]}\n'
+                        #'\n'
+                        #'\n'
+                        #f'⚒️{mats_list_embed[1]}\n'
+                        #'\n'
+                        #f'⚒**Total cost:**️{from_mats_cost[-1]} ({mats_city})\n'
+                        #'\n'
+                        #f'⚒**Total cost (14,8% RR):**️{float(from_mats_cost[-1])*float(0.848)}\n'
+                        #'\n'
+                        #f'⚒**Total cost (24,6% RR):**️{float(from_mats_cost[-1])*float(0.752)}\n'
         )
         print(f'http://render.albiononline.com/v1/item/{itemId}.png?count=1&quality={quality}')
         embed_msg.set_image(url=f'http://render.albiononline.com/v1/item/{itemId}.png?count=1&quality={quality}')

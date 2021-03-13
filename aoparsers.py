@@ -26,6 +26,9 @@ class AOParsers:
 			# print('AOParsers: Fixed @ symbol')
 		else:
 			fixed_itemId = itemId
+		if '_LEVEL' in fixed_itemId:
+			enchant = fixed_itemId[-1]
+			fixed_itemId = fixed_itemId + '@' + enchant
 		try:
 			html_data = requests.get(
 				f'https://www.albion-online-data.com/api/v2/stats/Prices/{fixed_itemId}.JSON?qualities={quality}',
@@ -136,6 +139,22 @@ class AOParsers:
 		return itemId
 
 	@staticmethod
+	def itemid_to_item(itemId):
+		print(f'AOParsers: Finding Item Name of {itemId}.')
+		with open('items.json', 'r', encoding='utf8') as file:
+			items_raw = json.load(file)
+			for item in items_raw:
+				if item is None:
+					continue
+				unique_names = item['UniqueName']
+				if unique_names is None:
+					continue
+				if itemId in unique_names:
+					names = item['LocalizedNames']
+					name = names["EN-US"]
+					return name
+
+	@staticmethod
 	def prices_sort(prices):
 		return
 
@@ -149,9 +168,10 @@ class AOParsers:
 		city_price = city_prices['sell_price_min']
 		city_date = city_prices['sell_price_min_date']
 		bm = city_prices['buy_price_max']
+		bm_date = city_prices['buy_price_max_date']
 		output = {
 			'city_price': city_price, 'city_date': city_date,
-			'bm': bm
+			'bm': bm, 'bm_date': bm_date
 		}
 		return output
 
@@ -213,6 +233,7 @@ class AOParsers:
 
 	@staticmethod
 	def get_reqs(itemId):
+		print(f"FROM GET REQS:{itemId}")
 		with open('crafting_reqs.json', 'r') as file:
 			reqs_raw = json.load(file)
 			reqs = reqs_raw[0]
@@ -222,7 +243,55 @@ class AOParsers:
 			if detect[0] in itemId:
 				detected = detect[1]
 
+		print('get_reqs:' f'{reqs[detected]}')
 		return reqs[detected]
+
+	@staticmethod
+	def mats_reqs(itemId):
+		print(f"FROM MATS REQS:{itemId}")
+		with open("crafting_reqs.json", 'r') as file:
+			output = []
+			reqs_raw = json.load(file)
+			mats = reqs_raw[2]
+			enchant = reqs_raw[3]
+			current_enchant = None
+		if "@" in itemId:
+			current_enchant = itemId[-1]
+		tier = itemId[0:2]
+		item = itemId[2:]
+		reqs = AOParsers.get_reqs(item)
+		for req in reqs:
+			amount = reqs[req]
+			mat_suffix = mats[req]
+			if current_enchant is not None:
+				mat = tier + mat_suffix + enchant[current_enchant]
+			else:
+				mat = tier + mat_suffix
+			total = {mat: amount}
+			output.append(total)
+		print('mats_reqs:' f'{output}')
+		return output
+
+	@staticmethod
+	def mats_cost(mats_reqs_output, city):
+		costs = []
+		total_costs = []
+		print(f'FROM MATS COST:{mats_reqs_output}')
+		for mat in mats_reqs_output:
+			matsId = next(iter(mat))
+			mats_count = mat[next(iter(mat))]
+			cost = AOParsers.flip(matsId, 1, city)
+			total_cost = int(cost["city_price"]) * int(mats_count)
+			mats_dict = {"total_cost": total_cost, "city_price": cost["city_price"], "city_date": cost["city_date"]}
+			costs.append(mats_dict)
+		for cost in costs:
+			price = cost['total_cost']
+			total_costs.append(price)
+		uptotal_costs = sum(total_costs)
+		costs.append(uptotal_costs)
+
+		return costs
+
 
 
 

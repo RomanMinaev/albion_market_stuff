@@ -50,11 +50,11 @@
     },
     "great_hammer": {
       "bar": 20,
-      "fiber": 12
+      "cloth": 12
     },
     "polehammer": {
       "bar": 20,
-      "fiber": 12
+      "cloth": 12
     },
     "crossbow": {
       "planks": 20,
@@ -214,7 +214,7 @@
     "boots": ["_SHOES_PLATE_", "boots"],
     "armor": ["_ARMOR_PLATE", "armor"],
     "helmet" : ["_HEAD_PLATE", "helmet"],
-    "sword" : ["_MAIN_SWORD", "sword"],
+    "broadsword" : ["_MAIN_SWORD", "broadsword"],
     "dual_sword" : ["_2H_DUALSWORD", "dual_sword"],
     "claymore" : ["_2H_CLAYMORE", "claymore"],
     "battleaxe" : ["_MAIN_AXE", "battleaxe"],
@@ -266,6 +266,17 @@
     "great_cursed" : ["_2H_CURSEDSTAFF", "great_cursed"],
     "demonic" : ["_2H_DEMONICSTAFF", "demonic"],
     "tome" : ["_OFF_BOOK", "tome"]
+  },
+  {
+    "cloth": "_CLOTH",
+    "bar": "_METALBAR",
+    "leather": "_LEATHER",
+    "planks": "_PLANKS"
+  },
+  {
+    "1": "_LEVEL1",
+    "2": "_LEVEL2",
+    "3": "_LEVEL3"
   }
 ]
 
