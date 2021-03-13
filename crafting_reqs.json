@@ -1,0 +1,271 @@
+[
+  {
+    "boots": {
+      "bar": 8
+    },
+    "armor": {
+      "bar": 16
+    },
+    "helmet": {
+      "bar": 8
+    },
+    "broadsword": {
+      "bar": 16,
+      "leather": 8
+    },
+    "claymore": {
+      "bar": 20,
+      "leather": 12
+    },
+    "dual_swords": {
+      "bar": 20,
+      "leather": 12
+    },
+    "battleaxe": {
+      "planks": 8,
+      "bar": 16
+    },
+    "greataxe": {
+      "planks": 12,
+      "bar": 20
+    },
+    "halberd": {
+      "planks": 20,
+      "bar": 12
+    },
+    "mace": {
+      "bar": 16,
+      "cloth": 8
+    },
+    "heavy_mace": {
+      "bar": 20,
+      "cloth": 12
+    },
+    "morning_star": {
+      "bar": 20,
+      "cloth": 12
+    },
+    "hammer": {
+      "bar": 24
+    },
+    "great_hammer": {
+      "bar": 20,
+      "fiber": 12
+    },
+    "polehammer": {
+      "bar": 20,
+      "fiber": 12
+    },
+    "crossbow": {
+      "planks": 20,
+      "bar": 12
+    },
+    "heavy_crossbow": {
+      "planks": 20,
+      "bar": 12
+    },
+    "light_crossbow": {
+      "planks": 16,
+      "bar": 8
+    },
+    "shield": {
+      "planks": 4,
+      "bar": 4
+    },
+    "shoes": {
+      "leather": 8
+    },
+    "jacket": {
+      "leahter": 8
+    },
+    "hood": {
+      "leather": 8
+    },
+    "bow": {
+      "planks": 32
+    },
+    "spear": {
+      "planks": 16,
+      "bar": 8
+    },
+    "pike": {
+      "planks": 20,
+      "bar": 12
+    },
+    "glaive": {
+      "planks": 12,
+      "bar": 20
+    },
+    "nature": {
+      "planks": 16,
+      "cloth": 8
+    },
+    "great_nature": {
+      "planks": 20,
+      "cloth": 12
+    },
+    "wild": {
+      "planks": 20,
+      "cloth": 12
+    },
+    "dagger": {
+      "bar": 12,
+      "leather": 12
+    },
+    "dagger_pair": {
+      "bar": 16,
+      "leather": 16
+    },
+    "claws": {
+      "bar": 12,
+      "leather": 20
+    },
+    "quarterstaff": {
+      "bar": 12,
+      "leather": 20
+    },
+    "iron-clad": {
+      "bar": 12,
+      "leather": 20
+    },
+    "double_bladed": {
+      "bar": 12,
+      "leather": 20
+    },
+    "torch": {
+      "planks": 4,
+      "cloth": 4
+    },
+    "sandals": {
+      "cloth": 8
+    },
+    "robe": {
+      "cloth": 16
+    },
+    "cowl": {
+      "cloth": 8
+    },
+    "fire": {
+      "planks": 16,
+      "bar": 8
+    },
+    "great_fire": {
+      "planks": 20,
+      "bar": 12
+    },
+    "infernal": {
+      "planks": 20,
+      "bar": 12
+    },
+    "holy": {
+      "planks": 16,
+      "cloth": 8
+    },
+    "great_holy": {
+      "planks": 20,
+      "cloth": 12
+    },
+    "divine": {
+      "planks": 20,
+      "cloth": 12
+    },
+    "arcane": {
+      "planks": 16,
+      "bar": 8
+    },
+    "great_arcane": {
+      "planks": 20,
+      "bar": 12
+    },
+    "enigmatic": {
+      "planks": 20,
+      "bar": 12
+    },
+    "frost": {
+      "planks": 16,
+      "bar": 8
+    },
+    "great_frost": {
+      "planks": 20,
+      "bar": 12
+    },
+    "glacial": {
+      "planks": 20,
+      "bar": 12
+    },
+    "cursed": {
+      "planks": 16,
+      "bar": 8
+    },
+    "great_cursed": {
+      "planks": 20,
+      "bar": 12
+    },
+    "demonic": {
+      "planks": 20,
+      "bar": 12
+    },
+    "tome": {
+    "cloth": 4,
+    "leather": 4
+    }
+  },
+  {
+    "boots": ["_SHOES_PLATE_", "boots"],
+    "armor": ["_ARMOR_PLATE", "armor"],
+    "helmet" : ["_HEAD_PLATE", "helmet"],
+    "sword" : ["_MAIN_SWORD", "sword"],
+    "dual_sword" : ["_2H_DUALSWORD", "dual_sword"],
+    "claymore" : ["_2H_CLAYMORE", "claymore"],
+    "battleaxe" : ["_MAIN_AXE", "battleaxe"],
+    "greataxe" : ["_2H_AXE", "greataxe"],
+    "halberd" : ["_2H_HALBERD", "halberd"],
+    "mace" : ["_MAIN_MACE", "mace"],
+    "heavy_mace" : ["_2H_MACE", "heavy_mace"],
+    "morning_star" : ["_2H_FLAIL", "morning_star"],
+    "hammer" : ["_MAIN_HAMMER", "hammer"],
+    "great_hammer" : ["_2H_HAMMER", "great_hammer"],
+    "polehammer" : ["_2H_POLEHAMMER", "polehammer"],
+    "crossbow" : ["_2H_CROSSBOW", "crossbow"],
+    "heavy_crossbow" : ["_2H_CROSSBOWLARGE", ""],
+    "light_crossbow" : ["_MAIN_1HCROSSBOW", ""],
+    "shield" : ["_OFF_SHIELD", "shield"],
+    "shoes" : ["_SHOES_LEATHER_", "shoes"],
+    "jacket" : ["_ARMOR_LEATHER_", "jacket"],
+    "hood" : ["_HEAD_LEATHER_", "hood"],
+    "bow" : ["_2H_BOW", "bow"],
+    "spear" : ["_MAIN_SPEAR", "spear"],
+    "pike" : ["_2H_SPEAR", "pike"],
+    "glaive" : ["_2H_GLAIVE", "glaive"],
+    "nature" : ["_MAIN_NATURESTAFF", "nature"],
+    "great_nature" : ["_2H_NATURESTAFF", "great_nature"],
+    "wild" : ["_2H_WILDSTAFF", "wild"],
+    "dagger" : ["_MAIN_DAGGER", "dagger"],
+    "dagger_pair" : ["_2H_DAGGERPAIR", "dagger_pair"],
+    "claws" : ["_2H_CLAWPAIR", "claws"],
+    "quarterstaff" : ["_2H_QUARTERSTAFF", "quarterstaff"],
+    "iron_clad" : ["_2H_IRONCLADEDSTAFF", "iron-clad"],
+    "double_bladed" : ["_2H_DOUBLEBLADEDSTAFF", "double_bladed"],
+    "torch" : ["_OFF_TORCH", "torch"],
+    "sandals" : ["_SHOES_CLOTH_", "sandals"],
+    "robe" : ["_ARMOR_CLOTH_", "robe"],
+    "cowl" : ["_HEAD_CLOTH_", "cowl"],
+    "fire" : ["_MAIN_FIRESTAFF", "fire"],
+    "great_fire" : ["_2H_FIRESTAFF", "great_fire"],
+    "infernal" : ["_2H_INFERNOSTAFF", "infernal"],
+    "holy" : ["_MAIN_HOLYSTAFF", "holy"],
+    "great_holy" : ["_2H_HOLYSTAFF", "great_holy"],
+    "divine" : ["_2H_DIVINESTAFF", "divine"],
+    "arcane" : ["_MAIN_ARCANESTAFF", "arcane"],
+    "great_arcane" : ["_2H_ARCANESTAFF", "great_arcane"],
+    "enigmatic" : ["_2H_ENIGMATICSTAFF", "enigmatic"],
+    "frost" : ["_MAIN_FROSTSTAFF", "frost"],
+    "great_frost" : ["_2H_FROSTSTAFF", "great_frost"],
+    "glacial" : ["_2H_GLACIALSTAFF", "glacial"],
+    "cursed" : ["_MAIN_CURSEDSTAFF", "cursed"],
+    "great_cursed" : ["_2H_CURSEDSTAFF", "great_cursed"],
+    "demonic" : ["_2H_DEMONICSTAFF", "demonic"],
+    "tome" : ["_OFF_BOOK", "tome"]
+  }
+]
+

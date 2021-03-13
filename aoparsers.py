@@ -211,3 +211,21 @@ class AOParsers:
 
 				unique_name = re.findall('.+(?=@)', unique_name)[0]
 
+	@staticmethod
+	def get_reqs(itemId):
+		with open('crafting_reqs.json', 'r') as file:
+			reqs_raw = json.load(file)
+			reqs = reqs_raw[0]
+			detects = reqs_raw[1]
+		for key in detects.keys():
+			detect = detects[key]
+			if detect[0] in itemId:
+				detected = detect[1]
+
+		return reqs[detected]
+
+
+
+
+
+
